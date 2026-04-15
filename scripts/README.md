@@ -68,6 +68,7 @@ Mappings live in `scripts/mappings/`. Each file covers one tag type:
 scripts/
   mappings/
     genres.json          # legacy string → canonical genre
+    literary_form.json   # explicit fiction/nonfiction subject strings → literary form
     subgenres.json        # legacy string → canonical subgenre
     content_formats.json  # legacy string → canonical format
     literary_themes.json  # legacy string → canonical theme
@@ -90,6 +91,17 @@ Each mapping file is a JSON object where keys are legacy strings (lowercase, str
 ```
 
 To add a new mapping: edit the appropriate file and open a PR. No code changes needed for new string mappings.
+
+### `analyze_literary_form_coverage.py`
+
+Measures how many flattened work-subject rows and unique works are covered by the
+current conservative `scripts/mappings/literary_form.json` ruleset.
+
+**Usage:**
+```bash
+python scripts/analyze_literary_form_coverage.py \
+  --input /path/to/work_subjects.csv
+```
 
 ---
 

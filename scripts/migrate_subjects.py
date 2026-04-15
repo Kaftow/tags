@@ -87,6 +87,7 @@ def is_classification_code(s: str) -> bool:
 
 class SubjectClassifier:
     def __init__(self):
+        self.literary_form_map = load_mapping("literary_form")
         self.genres_map = load_mapping("genres")
         self.subgenres_map = load_mapping("subgenres")
         self.formats_map = load_mapping("content_formats")
@@ -145,6 +146,8 @@ class SubjectClassifier:
                 return (type_map[prefix], value.title())
 
         # Mapping lookups (in priority order)
+        if key in self.literary_form_map:
+            return ("literary_form", self.literary_form_map[key])
         if key in self.genres_map:
             return ("genres", self.genres_map[key])
         if key in self.subgenres_map:
